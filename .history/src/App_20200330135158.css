@@ -28,8 +28,8 @@
   color: #61dafb;
 }
 
-div, h2, h3, p {
-  font-family: 'Gotham-Book';
+h2, h3, p {
+font-family: 'Gotham-Book';
 }
 
 @keyframes App-logo-spin {

@@ -54,7 +54,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2 className="title">Breweries Search by City</h2>
+        <h2 className="title">Breweries Search</h2>
         <input
           type="text"
           placeholder="Search for brewery by City"
@@ -69,7 +69,7 @@ class App extends Component {
         {this.state.byTypes.map(byType => (<ByType key={byType.id} byType={byType} />))}
 
         <hr />
-        <h3>List Breweries</h3>
+
         <button
           type="text"
           onClick={event => { this.breweries() }}

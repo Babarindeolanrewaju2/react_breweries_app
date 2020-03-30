@@ -28,10 +28,6 @@
   color: #61dafb;
 }
 
-div, h2, h3, p {
-  font-family: 'Gotham-Book';
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -42,6 +38,6 @@ div, h2, h3, p {
 }
 
 @font-face {
-  font-family: 'Gotham-Book';
-  src: local('Gotham-Book'), url(./fonts/Gotham-Book.otf) format('opentype');
+  font-family: 'Proxima';
+  src: local('Proxima'), url(./fonts/Proxima.otf) format('opentype');
 }

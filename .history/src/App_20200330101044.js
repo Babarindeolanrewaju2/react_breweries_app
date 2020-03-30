@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Breweries } from './component/Breweries';
 import { ByCity } from './component/ByCity';
-import { ByType } from './component/ByType';
 import './App.css';
 
 class App extends Component {
@@ -10,12 +9,11 @@ class App extends Component {
     this.state = {
       query: '',
       breweries: [],
-      byCitys: [],
-      byTypes: [],
+      byCity: []
     }
   }
 
-  breweries = () => {
+  breweries() {
     const BASE_URL = `https://api.openbrewerydb.org/breweries`;
     fetch(`${BASE_URL}`, {
       method: 'GET'
@@ -27,7 +25,7 @@ class App extends Component {
       })
   }
 
-  getBreweryByCity = () => {
+  getBrewery() {
     const BASE_URL = `https://api.openbrewerydb.org/breweries?by_city=`;
     fetch(`${BASE_URL}${this.state.query}`, {
       method: 'GET'
@@ -35,44 +33,30 @@ class App extends Component {
       .then(response => response.json())
       .then(json => {
         console.log('by_city', json);
-        this.setState({ byCitys: json, byTypes: [] });
-      })
-  }
-
-  getBreweryByType = (e, type) => {
-    const BASE_URL = `https://api.openbrewerydb.org/breweries?by_type=`;
-    fetch(`${BASE_URL}${type}`, {
-      method: 'GET'
-    })
-      .then(response => response.json())
-      .then(json => {
-        console.log('by_city', json);
-        this.setState({ byTypes: json, byCitys: [] });
+        this.setState({ byCity: json });
       })
   }
 
   render() {
     return (
       <div className="App">
-        <h2 className="title">Breweries Search by City</h2>
+        <h2 className="title">Breweries Search</h2>
         <input
           type="text"
-          placeholder="Search for brewery by City"
+          placeholder="Search for a Book"
           onChange={event => { this.setState({ query: event.target.value }) }}
           onKeyPress={event => {
             if (event.key === "Enter") {
-              this.getBreweryByCity()
+              this.getBrewery()
             }
           }}
         />
-        {this.state.byCitys.map(byCity => (<ByCity key={byCity.id} byCity={byCity} getBreweryByType={this.getBreweryByType} />))}
-        {this.state.byTypes.map(byType => (<ByType key={byType.id} byType={byType} />))}
-
+        {this.state.byCity.map(byCity => (<ByCity key={byCity.id} brewery={byCity} />))}
         <hr />
-        <h3>List Breweries</h3>
+
         <button
           type="text"
-          onClick={event => { this.breweries() }}
+          onClick={event => { this.search() }}
         >Get Breweries
         </button>
         {this.state.breweries.map(brewery => (<Breweries key={brewery.id} brewery={brewery} />))}
